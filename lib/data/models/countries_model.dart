@@ -1,11 +1,11 @@
 
 import 'dart:convert';
 
-Country countryModelFromJson(String str) =>
-    Country.fromJson(json.decode(str));
-String countryModelToJson(Country data) =>
+Countries countryModelFromJson(String str) =>
+    Countries.fromJson(json.decode(str));
+String countryModelToJson(Countries data) =>
     json.encode(data.toJson());
-class Country {
+class Countries {
   Name? name;
   List<String>? tld;
   String? cca2;
@@ -40,7 +40,7 @@ class Country {
   CapitalInfo? capitalInfo;
   PostalCode? postalCode;
 
-  Country(
+  Countries(
       {this.name,
         this.tld,
         this.cca2,
@@ -75,7 +75,7 @@ class Country {
         this.capitalInfo,
         this.postalCode});
 
-  Country.fromJson(Map<String, dynamic> json) {
+  Countries.fromJson(Map<String, dynamic> json) {
     name = json['name'] != null ? Name.fromJson(json['name']) : null;
     tld = json['tld'].cast<String>();
     cca2 = json['cca2'];

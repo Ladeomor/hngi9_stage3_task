@@ -41,6 +41,7 @@ dependencies:
   logger:
   grouped_list:
   flutter_riverpod:
+  hooks_riverpod:
 dev_dependencies:
   flutter_test:
     sdk: flutter

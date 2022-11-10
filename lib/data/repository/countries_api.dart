@@ -1,11 +1,12 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:dio/dio.dart';
-import 'package:country_app/data/models/country_model.dart';
+import 'package:country_app/data/models/countries_model.dart';
 import 'package:country_app/data/constants/api.dart';
 
 class CountryApi{
 
-  Future<Country> getAllCountries() async{
+  Future<Countries> getAllCountries() async{
     Logger logger = Logger();
     const url = allCountriesEndpoint;
 
@@ -13,12 +14,15 @@ class CountryApi{
     try{
       final response = await dio.get(url);
 
-      final countryModel = Country.fromJson(response.data);
+      final countryModel = Countries.fromJson(response.data);
       return countryModel;
     }catch(error){
       logger.wtf(error);
-      rethrow;
+      throw error;
     }
   }
 
+
+
 }
+final countryApiProvider = Provider((ref) => CountryApi());

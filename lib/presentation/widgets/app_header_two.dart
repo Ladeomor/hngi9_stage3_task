@@ -1,4 +1,4 @@
-import 'package:country_app/data/constants/text.dart';
+import 'package:country_app/presentation/widgets/constants/text.dart';
 import 'package:flutter/material.dart';
 
 class AppHeaderTwo extends StatelessWidget {
