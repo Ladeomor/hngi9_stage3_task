@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:country_app/data/models/countries_model.dart';
 import 'package:country_app/data/constants/countries_api.dart';
 import 'package:http/http.dart';
-import 'package:logger/logger.dart';
 
 class CountryApi{
   List<Countries> allCountries = [];

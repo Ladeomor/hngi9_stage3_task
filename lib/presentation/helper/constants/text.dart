@@ -31,7 +31,7 @@ class AppLargeText extends StatelessWidget {
 
     return Text(
         text,
-        style: GoogleFonts.poppins(color: Colors.black, fontSize: size, fontWeight: FontWeight.w500)
+        style: GoogleFonts.poppins(color: Colors.black, fontSize: size, fontWeight: FontWeight.bold)
     );
   }
 }

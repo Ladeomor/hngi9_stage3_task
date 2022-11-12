@@ -9,13 +9,13 @@ class Countries{
   bool? independent;
   String? status;
   bool? unMember;
-  Currencies? currencies;
+  Map<String, Currency>? currencies;
   Idd? idd;
   List<dynamic>? capital;
   List<String>? altSpellings;
   String? region;
   String? subregion;
-  Languages? languages;
+  Map<String, String>? languages;
   Translations? translations;
   List<double>? latlng;
   bool? landlocked;
@@ -80,7 +80,8 @@ class Countries{
     status = json['status'];
     unMember = json['unMember'];
     currencies = json['currencies'] != null
-        ? Currencies.fromJson(json['currencies'])
+        ? (json['currencies'] as Map<String, dynamic>).map(
+            (k, v) => MapEntry(k, Currency.fromJson(v as Map<String, dynamic>)))
         : null;
     idd = json['idd'] != null ? Idd.fromJson(json['idd']) : null;
     capital = json['capital'];
@@ -88,7 +89,8 @@ class Countries{
     region = json['region'];
     subregion = json['subregion'];
     languages = json['languages'] != null
-        ? Languages.fromJson(json['languages'])
+        ? Map.from(json['languages'])
+        .map((k, v) => MapEntry<String, String>(k, v))
         : null;
     translations = json['translations'] != null
         ? Translations.fromJson(json['translations'])
@@ -131,7 +133,7 @@ class Countries{
     data['status'] = status;
     data['unMember'] = unMember;
     if (currencies != null) {
-      data['currencies'] = currencies!.toJson();
+      data['currencies'] = currencies;
     }
     if (idd != null) {
       data['idd'] = idd!.toJson();
@@ -141,7 +143,7 @@ class Countries{
     data['region'] = region;
     data['subregion'] = subregion;
     if (languages != null) {
-      data['languages'] = languages!.toJson();
+      data['languages'] = languages;
     }
     if (translations != null) {
       data['translations'] = translations!.toJson();
@@ -243,12 +245,12 @@ class Eng {
   }
 }
 
-class Currencies {
+class Currency {
   BBD? bBD;
 
-  Currencies({this.bBD});
+  Currency({this.bBD});
 
-  Currencies.fromJson(Map<String, dynamic> json) {
+  Currency.fromJson(Map<String, dynamic> json) {
     bBD = json['BBD'] != null ? BBD.fromJson(json['BBD']) : null;
   }
 

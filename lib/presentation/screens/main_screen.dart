@@ -4,9 +4,12 @@ import 'package:country_app/logic/view_model_provider.dart';
 import 'package:country_app/presentation/helper/app_header_two.dart';
 import 'package:country_app/presentation/helper/app_textfield.dart';
 import 'package:country_app/presentation/helper/constants/text.dart';
+import 'package:country_app/presentation/helper/navigation.dart';
 import 'package:country_app/presentation/helper/progress_bar.dart';
+import 'package:country_app/presentation/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:page_transition/page_transition.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -56,21 +59,45 @@ class MainScreen extends ConsumerWidget {
                   final sortedCountryList = countryList..sort((item1, item2) => item1.name!.official.toString().compareTo(item2.name!.official.toString()));
                   final countryListt = sortedCountryList[index];
                   print(countryList[index].name);
-                return ListTile(
-                  leading:  Container(
-                                    height: 90,
-                                    width: 50,
-                                    margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                        image: NetworkImage(countryListt.flags!.png.toString()), fit: BoxFit.cover
-                                      )
+                return GestureDetector(
+                  onTap: (){
+                    navigateWithAnimation(context, PageTransitionType.leftToRight,
+                        CountryDetailsScreen(
+                            imageOne: countryListt.flags!.png.toString(),
+                            imageTwo: countryListt.coatOfArms!.png.toString().isEmpty ? countryListt.flags!.png.toString():countryListt.coatOfArms!.png.toString(),
+                            populationValue: countryListt.population.toString(),
+                            regionValue: countryListt.region.toString(),
+                            capitalValue: countryListt.capital!.join(','),
+                            mottoValue: countryListt.area.toString(),
+                          fourthDet: countryListt.languages![countryListt.languages!.keys.toList().first]!,
+
+                          fifthDet: countryListt.startOfWeek!.toString(),
+                          sixthDet: countryListt.independent! ? 'Yes' : 'No',
+                          seventhDet: countryListt.timezones!.first,
+                          eightDet: countryListt.car!.side.toString(),
+                          code: '${countryListt.idd!.root.toString()} ${countryListt.idd!.suffixes!.join(',').toString()}',
+                          ethnicGroup: countryListt.subregion.toString(),
+                          lat: countryListt.latlng!.first.toString(),
+                          long: countryListt.latlng!.last.toString(),
+
+                        ));
+                  },
+                  child: ListTile(
+                    leading:  Container(
+                                      height: 120,
+                                      width: 50,
+                                      margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        image: DecorationImage(
+                                          image: NetworkImage(countryListt.flags!.png.toString()), fit: BoxFit.cover
+                                        )
+                                      ),
                                     ),
-                                  ),
-                  title: AppText(text: countryListt.name!.official.toString()),
-                  subtitle: AppText(text: countryListt.region.toString()),
+                    title: AppText(text: countryListt.name!.official.toString()),
+                    subtitle: AppText(text: countryListt.region.toString()),
+                  ),
                 );
               }));
             }, error: (err, s) => AppText(text:err.toString()), loading:()=> Center(child: progressBar(),)),

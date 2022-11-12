@@ -1,7 +1,6 @@
 import 'package:country_app/data/country_data.dart';
 import 'package:country_app/data/models/countries_model.dart';
 import 'package:country_app/data/repository/countries_api.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // abstract class CountriesState{
 //   CountriesState();

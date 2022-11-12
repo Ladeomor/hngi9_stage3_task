@@ -38,11 +38,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts:
   http:
-  logger:
-  grouped_list:
   flutter_riverpod:
   hooks_riverpod:
-  page_transition: 
+  page_transition:
+  carousel_slider:
 dev_dependencies:
   flutter_test:
     sdk: flutter
