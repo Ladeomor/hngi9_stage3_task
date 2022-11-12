@@ -11,11 +11,11 @@ void main() {
   group('getAllCountries', () {
     test('should return list of countries for a successful api call',
             () async {
-      final mockHTTPClient = MockClient((request) async{
-        final response = {
-
-        };
-        });
+      // final mockHTTPClient = MockClient((request) async{
+      //   final response = {
+      //
+      //   };
+      //   });
       }
 
       );
