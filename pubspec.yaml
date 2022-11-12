@@ -41,6 +41,7 @@ dependencies:
   flutter_riverpod:
   hooks_riverpod:
   page_transition:
+  shared_preferences: ^2.0.15
 dev_dependencies:
   flutter_test:
     sdk: flutter

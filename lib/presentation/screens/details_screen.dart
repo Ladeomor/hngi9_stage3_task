@@ -1,4 +1,5 @@
 import 'package:country_app/data/models/countries_model.dart';
+import 'package:country_app/logic/dark_mode_notifier.dart';
 import 'package:country_app/logic/view_model_provider.dart';
 import 'package:country_app/presentation/helper/carousel.dart';
 import 'package:country_app/presentation/helper/constants/text.dart';
@@ -59,8 +60,11 @@ class _CountryDetailsScreenState extends ConsumerState<CountryDetailsScreen> {
 
   Widget build(BuildContext context) {
     final countriesViewModel = ref.watch(allCountriesNotifierProvider);
+    var darkMode = ref.watch(darkModeProvider);
+
 
     return Scaffold(
+      backgroundColor: darkMode ? Color(0xFF000F24):Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -70,9 +74,9 @@ class _CountryDetailsScreenState extends ConsumerState<CountryDetailsScreen> {
           onPressed: (){
             navigatePop(context);
           },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
+            icon:Icon(
+              Icons.arrow_back,
+              color: darkMode?Colors.white:Colors.black,
             )
         ),
       ),

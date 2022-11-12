@@ -1,4 +1,5 @@
 import 'package:country_app/data/models/countries_model.dart';
+import 'package:country_app/logic/dark_mode_notifier.dart';
 import 'package:country_app/logic/view_model/countries_vm.dart';
 import 'package:country_app/logic/view_model_provider.dart';
 import 'package:country_app/presentation/helper/app_header_two.dart';
@@ -20,7 +21,10 @@ class MainScreen extends ConsumerWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final countriesViewModel = ref.watch(allCountriesNotifierProvider);
+    var darkMode = ref.watch(darkModeProvider);
+
     return Scaffold(
+      backgroundColor: darkMode ? Color(0xFF000F24) : Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -35,9 +39,9 @@ class MainScreen extends ConsumerWidget {
         actions: [
               CircleAvatar(
                 radius: 20,
-                backgroundColor: Color(0xFFF2F4F7),
-                child: IconButton(icon: const Icon(Icons.wb_sunny_outlined, color: Colors.black), onPressed: (){
-
+                backgroundColor: darkMode?Color(0xFF98A2B3).withOpacity(0.2):Color(0xFFF2F4F7),
+                child: IconButton(icon: darkMode?const Icon(Icons.wb_sunny, color: Colors.white,):Icon(Icons.wb_sunny_outlined, color: Colors.black), onPressed: (){
+                  ref.read(darkModeProvider.notifier).toggle();
                 },),
               )
 

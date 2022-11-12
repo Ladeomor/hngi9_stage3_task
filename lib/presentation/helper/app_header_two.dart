@@ -1,19 +1,23 @@
+import 'package:country_app/logic/dark_mode_notifier.dart';
 import 'package:country_app/presentation/helper/constants/text.dart';
 import 'package:country_app/presentation/helper/navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AppHeaderTwo extends StatefulWidget {
+class AppHeaderTwo extends StatefulHookConsumerWidget {
   const AppHeaderTwo({Key? key}) : super(key: key);
 
   @override
-  State<AppHeaderTwo> createState() => _AppHeaderTwoState();
+  ConsumerState<AppHeaderTwo> createState() => _AppHeaderTwoState();
 }
 
-class _AppHeaderTwoState extends State<AppHeaderTwo> {
+class _AppHeaderTwoState extends ConsumerState<AppHeaderTwo> {
   int? _groupValue;
 
   @override
   Widget build(BuildContext context) {
+    var darkMode = ref.watch(darkModeProvider);
+
     return Row(
       children: [
         GestureDetector(
@@ -54,21 +58,21 @@ class _AppHeaderTwoState extends State<AppHeaderTwo> {
 
                 });
           },
-            child: buildLangContainer()),
+            child: buildLangContainer(darkMode)),
         const Spacer(),
-        buildFilterContainer(context)
+        buildFilterContainer(darkMode)
       ],
 
     );
   }
 
-  Widget buildLangContainer(){
+  Widget buildLangContainer(bool darkMode){
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding:  EdgeInsets.all(10),
       height: 50,
       width: 90,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: darkMode?Color(0xFF000F24):Colors.white,
 
           borderRadius: BorderRadius.circular(5),
         boxShadow: const [
@@ -88,7 +92,7 @@ class _AppHeaderTwoState extends State<AppHeaderTwo> {
       ),
       child: Row(
         children: [
-          const Icon(Icons.web),
+          const Icon(Icons.language),
           SizedBox(width: 5),
           AppText(text: 'EN'),
         ],
@@ -99,13 +103,13 @@ class _AppHeaderTwoState extends State<AppHeaderTwo> {
 
   }
 
-  Widget buildFilterContainer(BuildContext context){
+  Widget buildFilterContainer( bool darkMode){
     return Container(
       padding: const EdgeInsets.all(10),
       height: 50,
       width: 100,
       decoration: BoxDecoration(
-          color: const Color(0xFFFCFCFD),
+          color: darkMode?Color(0xFF000F24):Color(0xFFFCFCFD),
 
           borderRadius: BorderRadius.circular(5),
           boxShadow: const [
@@ -144,9 +148,9 @@ class _AppHeaderTwoState extends State<AppHeaderTwo> {
         groupValue: _groupValue,
         value: value,
         onChanged: (int? value) {
-          setState(() {
-            _groupValue = value;
-          });
+          // setState(() {
+          //   _groupValue = value;
+          // });
         },
         // other arguments
       ),
