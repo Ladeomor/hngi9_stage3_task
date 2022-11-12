@@ -10,11 +10,9 @@ class SearchTextField extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20, right: 20),
 
       height: 50,
-      width: 500,
       decoration: BoxDecoration(
         // border: Border.all(width: 1, color: Colors.black54),
         borderRadius: BorderRadius.circular(5),
-        color: Colors.white,
       ),
       child:  TextField(
         decoration: InputDecoration(
@@ -30,7 +28,7 @@ class SearchTextField extends StatelessWidget {
           fillColor: const Color(0xFFF2F4F7),
           filled: true,
           hintText: 'Search Country',
-          hintStyle: GoogleFonts.aclonica( color: const Color(0XFF667085), fontSize: 16, fontWeight: FontWeight.w500),
+          hintStyle: GoogleFonts.poppins( color: const Color(0XFF667085), fontSize: 16, fontWeight: FontWeight.w500),
           prefixIcon: const Icon(Icons.search, color: Color(0xFF667085),),
 
         ),

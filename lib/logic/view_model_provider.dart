@@ -8,3 +8,4 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final allCountriesNotifierProvider = FutureProvider<List<Countries>>((ref)async{
   return ref.watch(countryApiProvider).getAllCountries();
 });
+

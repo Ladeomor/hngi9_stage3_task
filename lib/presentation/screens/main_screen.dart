@@ -14,6 +14,7 @@ import 'package:page_transition/page_transition.dart';
 class MainScreen extends ConsumerWidget {
   const MainScreen({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final height = MediaQuery.of(context).size.height;
@@ -32,11 +33,14 @@ class MainScreen extends ConsumerWidget {
           ],
         ),
         actions: [
-          buildCircleContainer(
-              IconButton(icon: const Icon(Icons.wb_sunny_outlined, color: Colors.black), onPressed: (){
+              CircleAvatar(
+                radius: 20,
+                backgroundColor: Color(0xFFF2F4F7),
+                child: IconButton(icon: const Icon(Icons.wb_sunny_outlined, color: Colors.black), onPressed: (){
 
-              },)
-          ),
+                },),
+              )
+
         ],
         centerTitle: false,
 
@@ -50,19 +54,23 @@ class MainScreen extends ConsumerWidget {
 
             AppHeaderTwo(),
             SizedBox(height: 10,),
-            countriesViewModel.when(data: (countriesViewModel){
+
+              countriesViewModel.when(data: (countriesViewModel){
               List<Countries> countryList = countriesViewModel.map((e) => e).toList();
+
+             
               return Expanded(child: ListView.builder(
 
                 itemCount: countryList.length,
                   itemBuilder: (context, index){
                   final sortedCountryList = countryList..sort((item1, item2) => item1.name!.official.toString().compareTo(item2.name!.official.toString()));
                   final countryListt = sortedCountryList[index];
-                  print(countryList[index].name);
+
                 return GestureDetector(
                   onTap: (){
                     navigateWithAnimation(context, PageTransitionType.leftToRight,
                         CountryDetailsScreen(
+                          text: countryListt.name!.official.toString(),
                             imageOne: countryListt.flags!.png.toString(),
                             imageTwo: countryListt.coatOfArms!.png.toString().isEmpty ? countryListt.flags!.png.toString():countryListt.coatOfArms!.png.toString(),
                             populationValue: countryListt.population.toString(),
@@ -82,6 +90,7 @@ class MainScreen extends ConsumerWidget {
 
                         ));
                   },
+
                   child: ListTile(
                     leading:  Container(
                                       height: 120,
@@ -95,7 +104,7 @@ class MainScreen extends ConsumerWidget {
                                         )
                                       ),
                                     ),
-                    title: AppText(text: countryListt.name!.official.toString()),
+                    title: AppLargeText(text: countryListt.name!.official.toString(),size: 15,),
                     subtitle: AppText(text: countryListt.region.toString()),
                   ),
                 );
@@ -117,12 +126,5 @@ class MainScreen extends ConsumerWidget {
     );
   }
 
-  Widget buildCircleContainer(Widget child){
-    return Container(
-      height: 30,
-      width: 30,
-      color: const Color(0xFFFCFCFD),
-      child: child,
-    );
-  }
+
 }

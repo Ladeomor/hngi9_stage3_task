@@ -1,12 +1,14 @@
 import 'package:country_app/data/models/countries_model.dart';
 import 'package:country_app/logic/view_model_provider.dart';
 import 'package:country_app/presentation/helper/carousel.dart';
+import 'package:country_app/presentation/helper/constants/text.dart';
 import 'package:country_app/presentation/helper/navigation.dart';
 import 'package:country_app/presentation/widgets/country_details.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CountryDetailsScreen extends StatefulHookConsumerWidget {
+  final String text;
   final String imageOne;
   final String imageTwo;
   final String populationValue;
@@ -27,6 +29,7 @@ class CountryDetailsScreen extends StatefulHookConsumerWidget {
 
 
   const CountryDetailsScreen(  {Key? key,
+    required this.text,
     required this.imageOne,
     required this.imageTwo,
     required this.populationValue,
@@ -61,6 +64,8 @@ class _CountryDetailsScreenState extends ConsumerState<CountryDetailsScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        title: AppLargeText(text: widget.text, size: 15,),
+        centerTitle: true,
         leading: IconButton(
           onPressed: (){
             navigatePop(context);
