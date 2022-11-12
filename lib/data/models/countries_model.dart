@@ -1,13 +1,7 @@
 
-import 'dart:convert';
-
-Countries countryModelFromJson(String str) =>
-    Countries.fromJson(json.decode(str));
-String countryModelToJson(Countries data) =>
-    json.encode(data.toJson());
-class Countries {
+class Countries{
   Name? name;
-  List<String>? tld;
+  List<dynamic>? tld;
   String? cca2;
   String? ccn3;
   String? cca3;
@@ -17,7 +11,7 @@ class Countries {
   bool? unMember;
   Currencies? currencies;
   Idd? idd;
-  List<String>? capital;
+  List<dynamic>? capital;
   List<String>? altSpellings;
   String? region;
   String? subregion;
@@ -25,7 +19,7 @@ class Countries {
   Translations? translations;
   List<double>? latlng;
   bool? landlocked;
-  int? area;
+  double? area;
   Demonyms? demonyms;
   String? flag;
   Maps? maps;
@@ -77,7 +71,7 @@ class Countries {
 
   Countries.fromJson(Map<String, dynamic> json) {
     name = json['name'] != null ? Name.fromJson(json['name']) : null;
-    tld = json['tld'].cast<String>();
+    tld = json['tld'];
     cca2 = json['cca2'];
     ccn3 = json['ccn3'];
     cca3 = json['cca3'];
@@ -89,7 +83,7 @@ class Countries {
         ? Currencies.fromJson(json['currencies'])
         : null;
     idd = json['idd'] != null ? Idd.fromJson(json['idd']) : null;
-    capital = json['capital'].cast<String>();
+    capital = json['capital'];
     altSpellings = json['altSpellings'].cast<String>();
     region = json['region'];
     subregion = json['subregion'];
@@ -102,9 +96,8 @@ class Countries {
     latlng = json['latlng'].cast<double>();
     landlocked = json['landlocked'];
     area = json['area'];
-    demonyms = json['demonyms'] != null
-        ? Demonyms.fromJson(json['demonyms'])
-        : null;
+    demonyms =
+    json['demonyms'] != null ? Demonyms.fromJson(json['demonyms']) : null;
     flag = json['flag'];
     maps = json['maps'] != null ? Maps.fromJson(json['maps']) : null;
     population = json['population'];
@@ -113,9 +106,8 @@ class Countries {
     timezones = json['timezones'].cast<String>();
     continents = json['continents'].cast<String>();
     flags = json['flags'] != null ? Flags.fromJson(json['flags']) : null;
-    coatOfArms = json['coatOfArms'] != null
-        ? Flags.fromJson(json['coatOfArms'])
-        : null;
+    coatOfArms =
+    json['coatOfArms'] != null ? Flags.fromJson(json['coatOfArms']) : null;
     startOfWeek = json['startOfWeek'];
     capitalInfo = json['capitalInfo'] != null
         ? CapitalInfo.fromJson(json['capitalInfo'])
@@ -290,13 +282,13 @@ class BBD {
 
 class Idd {
   String? root;
-  List<String>? suffixes;
+  List<dynamic>? suffixes;
 
   Idd({this.root, this.suffixes});
 
   Idd.fromJson(Map<String, dynamic> json) {
     root = json['root'];
-    suffixes = json['suffixes'].cast<String>();
+    suffixes = json['suffixes'];
   }
 
   Map<String, dynamic> toJson() {
@@ -503,7 +495,6 @@ class Demonyms {
   }
 }
 
-
 class Maps {
   String? googleMaps;
   String? openStreetMaps;
@@ -524,13 +515,13 @@ class Maps {
 }
 
 class Car {
-  List<String>? signs;
+  List<dynamic>? signs;
   String? side;
 
   Car({this.signs, this.side});
 
   Car.fromJson(Map<String, dynamic> json) {
-    signs = json['signs'].cast<String>();
+    signs = json['signs'];
     side = json['side'];
   }
 
@@ -562,12 +553,12 @@ class Flags {
 }
 
 class CapitalInfo {
-  List<double>? latlng;
+  List<dynamic>? latlng;
 
   CapitalInfo({this.latlng});
 
   CapitalInfo.fromJson(Map<String, dynamic> json) {
-    latlng = json['latlng'].cast<double>();
+    latlng = json['latlng'];
   }
 
   Map<String, dynamic> toJson() {
@@ -589,7 +580,7 @@ class PostalCode {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['format'] = format;
     data['regex'] = regex;
     return data;

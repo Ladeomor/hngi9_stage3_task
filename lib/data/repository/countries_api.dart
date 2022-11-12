@@ -1,28 +1,34 @@
+import 'dart:convert';
+
+import 'package:country_app/data/country_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-import 'package:dio/dio.dart';
 import 'package:country_app/data/models/countries_model.dart';
-import 'package:country_app/data/constants/api.dart';
+import 'package:country_app/data/constants/countries_api.dart';
+import 'package:http/http.dart';
+import 'package:logger/logger.dart';
 
 class CountryApi{
+  List<Countries> allCountries = [];
 
-  Future<Countries> getAllCountries() async{
-    Logger logger = Logger();
+  Future<List<Countries>>getAllCountries() async{
+
     const url = allCountriesEndpoint;
-
-    var dio = Dio();
-    try{
-      final response = await dio.get(url);
-
-      final countryModel = Countries.fromJson(response.data);
-      return countryModel;
-    }catch(error){
-      logger.wtf(error);
-      throw error;
+    Response response = await get(Uri.parse(url));
+    if(response.statusCode == 200){
+      var result = jsonDecode(response.body) as List;
+      print(result);
+      for(var element in result){
+        allCountries.add(Countries.fromJson(element));
+      }
+      return allCountries;
+    }else{
+      throw Exception(response.reasonPhrase);
     }
+
   }
 
 
 
 }
-final countryApiProvider = Provider((ref) => CountryApi());
+final countryApiProvider = Provider<CountryApi>((ref) => CountryApi());

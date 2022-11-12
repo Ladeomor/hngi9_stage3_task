@@ -1,4 +1,4 @@
-import 'package:country_app/presentation/widgets/constants/text.dart';
+import 'package:country_app/presentation/helper/constants/text.dart';
 import 'package:flutter/material.dart';
 
 class AppHeaderTwo extends StatelessWidget {
@@ -9,25 +9,26 @@ class AppHeaderTwo extends StatelessWidget {
     return Row(
       children: [
         buildLangContainer(),
-        Spacer(),
-        buildLangContainer()
+        const Spacer(),
+        buildFilterContainer()
       ],
 
     );
   }
   Widget buildLangContainer(){
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       height: 50,
-      width: 150,
-      color: Colors.white,
+      width: 90,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
+          color: Colors.white,
+
+          borderRadius: BorderRadius.circular(5),
         boxShadow: const [
           BoxShadow(
             offset: Offset(0, 1),
             blurRadius: 2,
-            color: Color(0xFF101828)
+            color: Colors.grey
 
 
           )
@@ -40,7 +41,7 @@ class AppHeaderTwo extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(Icons.web),
+          const Icon(Icons.web),
           AppText(text: 'EN'),
         ],
 
@@ -51,17 +52,18 @@ class AppHeaderTwo extends StatelessWidget {
   }
   Widget buildFilterContainer(){
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       height: 50,
-      width: 180,
-      color: const Color(0xFFFCFCFD),
+      width: 100,
       decoration: BoxDecoration(
+          color: const Color(0xFFFCFCFD),
+
           borderRadius: BorderRadius.circular(5),
           boxShadow: const [
             BoxShadow(
                 offset: Offset(0, 1),
                 blurRadius: 2,
-                color: Color(0xFF101828)
+                color: Colors.grey
 
 
             )

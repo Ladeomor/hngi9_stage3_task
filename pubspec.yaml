@@ -37,14 +37,16 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   google_fonts:
-  dio:
+  http:
   logger:
   grouped_list:
   flutter_riverpod:
   hooks_riverpod:
+  page_transition: 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mocktail:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
