@@ -35,7 +35,6 @@ http: To make http requests
 hooks_riverpod: Replace the default Stateful widget
 page_transition: 
 
-## APK Link
 
 ## Description of challenges and how I solved them
 Felt like the most complicated json ever. 
@@ -45,6 +44,7 @@ Tried to write test.
 The change in deadline put some tension on me.
 
 ## Appetize.io link
+https://appetize.io/app/pyphmu4x4wtdmmfrd5yivmj5ty?device=pixel4&osVersion=11.0&scale=75
 
 ## Github Link
 https://github.com/Ladeomor/hngi9_stage3_task

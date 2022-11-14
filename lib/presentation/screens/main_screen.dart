@@ -22,12 +22,14 @@ class MainScreen extends HookConsumerWidget {
 
 
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+
+
     final countriesViewModel = ref.watch(allCountriesNotifierProvider);
     var darkMode = ref.watch(darkModeProvider);
+
 
 
 
@@ -121,7 +123,8 @@ class MainScreen extends HookConsumerWidget {
                   ),
                 );
               }));
-            }, error: (err, s) => AppText(text:err.toString()), loading:()=> Center(child: progressBar(),)),
+            }, error: (err, s) => AppText(text:err.toString()),
+                  loading:()=> Center(child: progressBar(),)),
           ],
         ),
       ),

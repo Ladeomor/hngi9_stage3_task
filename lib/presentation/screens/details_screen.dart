@@ -63,6 +63,7 @@ class _CountryDetailsScreenState extends ConsumerState<CountryDetailsScreen> {
     var darkMode = ref.watch(darkModeProvider);
 
 
+
     return Scaffold(
       backgroundColor: darkMode ? Color(0xFF000F24):Colors.white,
       appBar: AppBar(
