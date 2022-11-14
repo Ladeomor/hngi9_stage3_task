@@ -1,14 +1,41 @@
+import 'package:country_app/data/models/countries_model.dart';
+import 'package:country_app/data/repository/countries_api.dart';
 import 'package:country_app/logic/dark_mode_notifier.dart';
+import 'package:country_app/logic/search_notifier.dart';
+import 'package:country_app/logic/view_model_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SearchTextField extends ConsumerWidget {
+class SearchTextField extends HookConsumerWidget {
+
   const SearchTextField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    List<Countries> countriesSearchList =
+        ref.watch(searchControllerProvider.notifier).countries;
+
     var darkMode = ref.watch(darkModeProvider);
+    final searchFieldController = useTextEditingController();
+    final FocusNode node = FocusNode();
+
+    final _isSearchFieldEmpty = useState<bool>(true);
+
+    final _searchList = useState<List<Countries>>([]);
+    bool isSearchFieldEmpty() {
+      return searchFieldController.text.isEmpty;
+    }
+
+    useEffect(() {
+      searchFieldController.addListener(() {
+        _isSearchFieldEmpty.value = isSearchFieldEmpty();
+
+      });
+    }, [searchFieldController]);
 
     return Container(
       padding: const EdgeInsets.only(left: 20, right: 20),
@@ -19,6 +46,14 @@ class SearchTextField extends ConsumerWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       child:  TextField(
+        autofocus: true,
+        focusNode: node,
+
+        controller: searchFieldController,
+
+        onChanged: (val){
+          _searchList.value = ref.watch(searchControllerProvider.notifier).getBySearch(val);
+        },
         decoration: InputDecoration(
           focusedBorder:  OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),

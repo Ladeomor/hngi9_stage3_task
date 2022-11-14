@@ -22,6 +22,7 @@ class DarkModeNotifier extends StateNotifier<bool> {
   }
 }
 
+
 final darkModeProvider = StateNotifierProvider<DarkModeNotifier, bool>(
       (ref) => DarkModeNotifier(),
 );

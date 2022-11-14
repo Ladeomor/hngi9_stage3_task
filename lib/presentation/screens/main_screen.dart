@@ -1,5 +1,6 @@
 import 'package:country_app/data/models/countries_model.dart';
 import 'package:country_app/logic/dark_mode_notifier.dart';
+import 'package:country_app/logic/search_notifier.dart';
 import 'package:country_app/logic/view_model/countries_vm.dart';
 import 'package:country_app/logic/view_model_provider.dart';
 import 'package:country_app/presentation/helper/app_header_two.dart';
@@ -9,11 +10,16 @@ import 'package:country_app/presentation/helper/navigation.dart';
 import 'package:country_app/presentation/helper/progress_bar.dart';
 import 'package:country_app/presentation/screens/details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
-class MainScreen extends ConsumerWidget {
+class MainScreen extends HookConsumerWidget {
   const MainScreen({Key? key}) : super(key: key);
+
 
 
   @override
@@ -22,6 +28,8 @@ class MainScreen extends ConsumerWidget {
     final width = MediaQuery.of(context).size.width;
     final countriesViewModel = ref.watch(allCountriesNotifierProvider);
     var darkMode = ref.watch(darkModeProvider);
+
+
 
     return Scaffold(
       backgroundColor: darkMode ? Color(0xFF000F24) : Colors.white,
@@ -53,8 +61,9 @@ class MainScreen extends ConsumerWidget {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
-            SearchTextField(),
-            SizedBox(height: 30,),
+       SearchTextField(),
+
+      SizedBox(height: 30,),
 
             AppHeaderTwo(),
             SizedBox(height: 10,),
@@ -62,13 +71,12 @@ class MainScreen extends ConsumerWidget {
               countriesViewModel.when(data: (countriesViewModel){
               List<Countries> countryList = countriesViewModel.map((e) => e).toList();
 
-             
               return Expanded(child: ListView.builder(
 
                 itemCount: countryList.length,
                   itemBuilder: (context, index){
                   final sortedCountryList = countryList..sort((item1, item2) => item1.name!.official.toString().compareTo(item2.name!.official.toString()));
-                  final countryListt = sortedCountryList[index];
+                  var countryListt = sortedCountryList[index];
 
                 return GestureDetector(
                   onTap: (){
